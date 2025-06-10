@@ -1,0 +1,108 @@
+{
+    "servers": [
+        {
+            "name": "db-staging-01",
+            "ip": "10.0.248.183",
+            "is_running": true,
+            "services": [
+                "postgresql",
+                "mysql",
+                "mongodb"
+            ],
+            "metadata": {
+                "uptime": "207 days 8 hours",
+                "location": "GCP - us-central1",
+                "OS": "Debian",
+                "environment": "staging"
+            }
+        },
+        {
+            "name": "web-dev-02",
+            "ip": "10.0.155.65",
+            "is_running": true,
+            "services": [
+                "apache",
+                "nginx",
+                "gunicorn"
+            ]
+        },
+        {
+            "name": "web-prod-03",
+            "ip": "10.0.55.195",
+            "is_running": false,
+            "metadata": {
+                "uptime": "293 days 6 hours",
+                "location": "Azure - East US",
+                "OS": "Windows Server",
+                "environment": "prod"
+            }
+        },
+        {
+            "name": "cache-dev-04",
+            "ip": "10.0.11.99",
+            "is_running": false,
+            "metadata": {
+                "uptime": "23 days 4 hours",
+                "location": "Azure - East US",
+                "OS": "CentOS",
+                "environment": "dev"
+            }
+        },
+        {
+            "name": "cache-staging-05",
+            "ip": "10.0.100.80",
+            "is_running": false,
+            "metadata": {
+                "uptime": "212 days 0 hours",
+                "location": "GCP - us-central1",
+                "OS": "Windows Server",
+                "environment": "staging"
+            }
+        },
+        {
+            "name": "monitor-prod-06",
+            "ip": "10.0.63.31",
+            "is_running": true,
+            "services": [
+                "grafana"
+            ],
+            "metadata": {
+                "uptime": "346 days 6 hours",
+                "location": "GCP - us-central1",
+                "OS": "Ubuntu",
+                "environment": "prod"
+            }
+        },
+        {
+            "name": "db-dev-07",
+            "ip": "10.0.219.215",
+            "is_running": false
+        },
+        {
+            "name": "web-staging-08",
+            "ip": "10.0.252.237",
+            "is_running": true,
+            "services": [
+                "apache",
+                "gunicorn"
+            ]
+        },
+        {
+            "name": "web-staging-09",
+            "ip": "10.0.21.228",
+            "is_running": true,
+            "services": [
+                "flask",
+                "gunicorn"
+            ]
+        },
+        {
+            "name": "monitor-staging-10",
+            "ip": "10.0.44.39",
+            "is_running": true,
+            "services": [
+                "prometheus"
+            ]
+        }
+    ]
+}
