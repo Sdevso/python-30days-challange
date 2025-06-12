@@ -1,71 +1,113 @@
 """
-Day 7: File Operations
+Day 7: Modules - File System Operations
 
-Challenge Description:
-Create a script that performs various file system operations related to server
-management, such as log rotation, disk space checking, and file monitoring.
+Objective:
+Create a file system checker module using Python's built-in modules to monitor
+and manage system files and directories.
 
 Learning Objectives:
-1. File system operations
-2. File monitoring
-3. Log management
-4. Directory operations
-5. File pattern matching
+1. Understanding Python modules
+2. Using os and sys modules
+3. Working with file paths
+4. Creating custom modules
 
-Requirements:
-1. Implement functions for:
-   - Log file rotation
-   - Disk space monitoring
-   - File change detection
-   - Directory size calculation
-   - File pattern matching
+Detailed Instructions:
+1. Module Basics (15 mins):
+   - Import built-in modules
+   - Access module functions
+   - Understand module scope
+   - Create module variables
 
-2. Handle various file operations:
-   - Read/Write operations
-   - File moving/copying
-   - Pattern matching
-   - Permission checking
+2. File Operations (15 mins):
+   - Check file existence
+   - Get file information
+   - Handle file paths
+   - Work with directories
 
-Hints:
-1. File Operations Libraries:
-   - os.path for path operations
-   - shutil for file operations
-   - glob for pattern matching
-   - watchdog for file monitoring
+3. Custom Module (15 mins):
+   - Create module structure
+   - Add module functions
+   - Write documentation
+   - Test functionality
 
-2. Log Rotation:
-   - Check file size
-   - Date-based rotation
-   - Compression
-   - Maintain history
+4. Module Integration (15 mins):
+   - Import custom modules
+   - Use module functions
+   - Handle module errors
+   - Create module tests
 
-3. File Monitoring Structure:
-   {
-       'path': '/logs/app.log',
-       'size': 1048576,
-       'last_modified': '2025-06-10 10:00:00',
-       'permissions': '644',
-       'owner': 'user'
-   }
+Key Concepts:
+1. Module Import Methods:
+   ```python
+   # Different import styles
+   import os
+   from os import path
+   from os.path import exists as file_exists
+   ```
 
-4. Pattern Matching:
-   - Use glob patterns
-   - Regular expressions
-   - Recursive search
-   - Exclusion patterns
+2. Common Module Functions:
+   ```python
+   # File operations
+   os.path.exists(file_path)
+   os.path.getsize(file_path)
+   os.listdir(directory)
+   ```
 
-Bonus Challenges:
-1. Implement real-time file monitoring
-2. Add file compression handling
-3. Create file backup functionality
-4. Add file integrity checking
+Challenge Tasks:
+1. Create a file monitor
+2. Add file statistics
+3. Implement file search
+4. Create backup utility
 
-Tips:
-- Use context managers for file operations
-- Implement proper error handling
-- Consider large file handling
-- Add progress indicators for long operations
-- Handle file locks correctly
+Tips for Success:
+- Use absolute paths
+- Handle path separators
+- Check file permissions
+- Close file handles
+
+Common Mistakes to Avoid:
+- Hardcoded paths
+- Missing error handling
+- Platform-specific code
+- Resource leaks
 """
 
-# Implement your solution here
+# Only necessary imports
+import os
+import sys
+from typing import Dict, List, Optional
+
+# Module-level variables
+DEFAULT_PATH = "."
+IGNORE_PATTERNS = [".git", "__pycache__", "*.pyc"]
+
+def check_file_exists(filename: str) -> bool:
+    """Check if a file exists.
+    
+    Args:
+        filename: Name of file to check
+        
+    Returns:
+        bool: True if file exists
+    """
+    return os.path.exists(filename)
+
+def get_file_info(filepath: str) -> Dict:
+    """Get file information.
+    
+    Args:
+        filepath: Path to the file
+        
+    Returns:
+        dict: File information
+    """
+    return {
+        "size": os.path.getsize(filepath),
+        "modified": time.ctime(os.path.getmtime(filepath)),
+        "type": "file" if os.path.isfile(filepath) else "directory"
+    }
+
+# If run as a script
+if __name__ == "__main__":
+    # Test the module
+    print(check_file_exists("test.txt"))

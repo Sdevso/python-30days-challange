@@ -211,25 +211,13 @@ python-for-devops-30day/
 
 ---
 
-## 🔗 Resources
-- [Real Python](https://realpython.com)
-- [Python Cheatsheet](https://www.pythoncheatsheet.org/)
-- [Python DevOps Projects](https://github.com/search?q=python+devops&type=repositories)
+## 🔗 Getting Started
 
----
-
-## 📌 How to Use This Repo
-1. Create a new branch: `learning/python-devops`
-2. Commit daily: `git commit -m "Day 3: Input and f-strings"`
-3. Reflect and share progress weekly on LinkedIn
-4. Reuse scripts in real automation tasks!
-
----
-
-## 🎓 Next Steps After 30 Days
-- Write pytest unit tests for each script
-- Convert into a Python Package (CLI)
-- Automate your DevOps pipelines with Python helpers
+1. Clone the repository and create a Python virtual environment
+2. Install required packages: `pip install -r requirements.txt`
+3. Start with Week 1, Day 1 and progress through each day
+4. Complete the challenges and exercises
+5. Use the hints and documentation when needed
 
 ---
 
@@ -436,43 +424,17 @@ Master Python for DevOps through hands-on projects! This practical, project-base
 - [ ] Mobile app integration
 - [ ] AI/ML integration
 
-## 🏅 Certification
-
-Complete all 30 days to earn your Python for DevOps certification! Track your progress and showcase your skills.
-
-## 🌐 Community
-
-- Join our [Discord Server](https://discord.gg/yourserver)
-- Follow us on [Twitter](https://twitter.com/yourhandle)
-- Read our [Blog](https://yourblog.com)
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Python Community
-- DevOps Engineers worldwide
-- Open Source Contributors
-- Cloud Platform Providers
-
-## 📞 Support
+## 📝 Additional Resources
 
 Need help? Check out:
-- [FAQs](docs/FAQ.md)
-- [Troubleshooting Guide](docs/TROUBLESHOOTING.md)
-- [Discussion Forum](https://github.com/yourusername/python-30days/discussions)
+- [FAQ.md](FAQ.md) for common questions
+- [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for technical issues
+- [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines
 
----
+## 📚 References
 
-<p align="center">
-Made with ❤️ for the DevOps Community
-</p>
-
-<p align="center">
-<a href="https://python.org">Python</a> •
-<a href="https://docker.com">Docker</a> •
-<a href="https://kubernetes.io">Kubernetes</a> •
-<a href="https://aws.amazon.com">AWS</a>
-</p>
+- [Python Documentation](https://docs.python.org/3/)
+- [DevOps Best Practices](https://devops.com/)
+- [AWS Documentation](https://docs.aws.amazon.com/)
+- [Docker Documentation](https://docs.docker.com/)
+- [Kubernetes Documentation](https://kubernetes.io/docs/)

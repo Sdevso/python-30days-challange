@@ -1,86 +1,87 @@
 """
-Day 10: Configuration Management
+Day 10: CLI Arguments - Config Manager
 
-Challenge Description:
-Create a flexible configuration management system that can handle multiple
-config formats, validate settings, and provide easy access to configuration
-values throughout your application.
+Objective:
+Build a configuration management system that can handle command-line arguments,
+read config files, and manage application settings.
 
 Learning Objectives:
-1. Handle multiple config formats
-2. Implement config validation
-3. Manage default values
-4. Create config inheritance
+1. Working with sys.argv
+2. Parsing command line args
+3. Reading config files
+4. Managing app settings
 
-Requirements:
-1. Support multiple formats:
-   - YAML
-   - JSON
-   - INI
-   - ENV variables
+Detailed Instructions:
+1. Command Line Args (15 mins):
+   - Access sys.argv
+   - Parse arguments
+   - Handle options
+   - Set defaults
 
-2. Implement features:
-   - Config validation
-   - Default values
-   - Environment overrides
-   - Config inheritance
+2. Config File Handling (15 mins):
+   - Read config files
+   - Parse different formats
+   - Validate settings
+   - Handle errors
 
-Hints:
-1. Config File Structure:
-   yaml_example:
-     app:
-       name: ServerMonitor
-       version: 1.0
-     monitoring:
-       interval: 300
-       timeout: 30
-     servers:
-       - name: prod-1
-         ip: 10.0.0.1
-         services:
-           - nginx
-           - mysql
+3. Settings Management (15 mins):
+   - Combine sources
+   - Override settings
+   - Validate values
+   - Apply defaults
 
-2. Validation Rules:
-   - Required fields
-   - Data types
-   - Value ranges
-   - Format patterns
-   - Dependencies
-
-3. Environment Handling:
-   - Load order:
-     1. Default config
-     2. Config files
-     3. Environment variables
-     4. Command line args
-
-4. Config Access Methods:
-   - Dot notation
-   - Dictionary style
+4. Advanced Features (15 mins):
    - Environment variables
-   - Default values
+   - Multiple formats
+   - Config validation
+   - Error handling
 
-Bonus Challenges:
-1. Add schema validation
-2. Implement config versioning
-3. Add secure credential handling
-4. Create config documentation
+Key Concepts:
+1. Argument Parsing:
+   ```python
+   # Basic argument handling
+   import sys
+   
+   if len(sys.argv) > 1:
+       config_file = sys.argv[1]
+   else:
+       config_file = 'default.conf'
+   ```
 
-Tips:
-- Use strong typing
-- Implement config caching
-- Add change detection
-- Support hot reloading
-- Include config documentation
+2. Config Reading:
+   ```python
+   # Read config file
+   def read_config(filename):
+       with open(filename) as f:
+           return f.read()
+   ```
+
+Challenge Tasks:
+1. Support multiple formats
+2. Add validation rules
+3. Implement config merge
+4. Create config wizard
+
+Tips for Success:
+- Validate all inputs
+- Provide defaults
+- Handle missing files
+- Document options
+
+Common Mistakes to Avoid:
+- Hard-coded paths
+- Missing validation
+- No error handling
+- Unclear help text
 """
 
-import configparser
-import yaml
+# Only necessary imports
+import sys
 import os
+from typing import Dict, List, Optional
 
 class ConfigManager:
-    def __init__(self, config_path):
+    def __init__(self, config_path: str):
         self.config_path = config_path
         self.config = {}
     
@@ -96,7 +97,7 @@ class ConfigManager:
         # TODO: Implement config validation
         pass
     
-    def get_server_config(self, server_name):
+    def get_server_config(self, server_name: str) -> Optional[Dict]:
         # TODO: Implement server config retrieval
         pass
 

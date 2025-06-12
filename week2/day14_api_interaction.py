@@ -1,109 +1,112 @@
 """
-Day 14: Working with APIs
+Day 14: YAML Parsing - Configuration Parser
 
-Challenge Description:
-Create a robust API client that can interact with various server monitoring
-APIs, handle authentication, manage rate limits, and process responses
-reliably.
+Objective:
+Build a YAML configuration parser that can handle complex configuration files,
+including NGINX-style configurations and nested data structures.
 
 Learning Objectives:
-1. Design API clients
-2. Handle authentication
-3. Implement rate limiting
-4. Process API responses
+1. Understanding YAML format
+2. Using PyYAML library
+3. Parsing config files
+4. Managing nested data
 
-Requirements:
-1. Support multiple APIs:
-   - Server monitoring APIs
-   - Cloud provider APIs
-   - Service status APIs
-   - Metrics APIs
+Detailed Instructions:
+1. YAML Basics (15 mins):
+   - Install PyYAML
+   - Read YAML files
+   - Parse YAML data
+   - Handle syntax
 
-2. Handle various auth types:
-   - API keys
-   - OAuth
-   - Bearer tokens
-   - Basic auth
+2. Config Structure (15 mins):
+   - Define YAML schema
+   - Handle nested configs
+   - Support lists/arrays
+   - Manage key-value pairs
 
-Hints:
-1. API Client Structure:
-   def make_request(
-       endpoint: str,
-       method: str = 'GET',
-       params: Dict = None,
-       data: Dict = None,
-       headers: Dict = None,
-       retry_count: int = 3
-   ) -> Dict:
-       # Handle authentication
-       # Implement rate limiting
-       # Make request
-       # Process response
-       # Handle errors
+3. NGINX Style (15 mins):
+   - Parse server blocks
+   - Handle directives
+   - Support includes
+   - Manage locations
+   
+4. Advanced Features (15 mins):
+   - Validate schemas
+   - Handle anchors/aliases
+   - Support multi-doc
+   - Add error checks
 
-2. Rate Limiting:
-   {
-       'endpoint': {
-           'last_call': timestamp,
-           'calls_made': count,
-           'reset_time': timestamp
-       }
-   }
+Key Concepts:
+1. YAML Operations:
+   ```python
+   import yaml
+   
+   # Load YAML file
+   with open('config.yml') as f:
+       config = yaml.safe_load(f)
+   ```
 
-3. Response Processing:
-   - Status code validation
-   - Error message extraction
-   - Data validation
-   - Response formatting
+2. Config Structure:
+   ```yaml
+   # Example YAML
+   server:
+     host: localhost
+     ports:
+       - 8080
+       - 8081
+     logging:
+       level: INFO
+       file: app.log
+   ```
 
-4. Error Handling:
-   - Network errors
-   - API errors
-   - Rate limit errors
-   - Auth errors
-   - Timeout handling
+Challenge Tasks:
+1. Parse NGINX configs
+2. Add validation rules
+3. Support includes
+4. Handle complex nesting
 
-Bonus Challenges:
-1. Add response caching
-2. Implement request queuing
-3. Add async support
-4. Create API documentation
+Tips for Success:
+- Use safe_load
+- Validate syntax
+- Check data types
+- Handle missing data
 
-Tips:
-- Use session objects
-- Implement retry logic
-- Add request logging
-- Handle pagination
-- Validate responses
+Common Mistakes to Avoid:
+- Using unsafe load
+- Missing error checks
+- Invalid YAML syntax
+- Hardcoded paths
 """
 
-import requests
-import json
-import time
-from typing import Dict, Any
+# Only necessary imports
+import yaml
+from typing import Dict, List, Any, Optional
 
-class APIClient:
-    def __init__(self, base_url: str, api_key: str):
-        self.base_url = base_url
-        self.api_key = api_key
-        self.session = requests.Session()
-        self.rate_limit_delay = 1.0  # seconds
-    
-    def _handle_rate_limit(self):
-        # TODO: Implement rate limiting
-        pass
-    
-    def get_server_status(self, server_id: str) -> Dict[str, Any]:
-        # TODO: Implement server status API call
-        pass
-    
-    def update_server_config(self, server_id: str, config: Dict[str, Any]) -> bool:
-        # TODO: Implement server config update
-        pass
+def load_yaml_config(config_path: str) -> Optional[Dict[str, Any]]:
+    """Load YAML configuration file."""
+    try:
+        with open(config_path, 'r') as f:
+            return yaml.safe_load(f)
+    except yaml.YAMLError as e:
+        print(f"Error parsing YAML: {e}")
+        return None
+    except FileNotFoundError:
+        print(f"Config file not found: {config_path}")
+        return None
 
-def main():
-    # TODO: Implement main function to demonstrate API usage
+def parse_nginx_config(nginx_config: Dict[str, Any]) -> None:
+    """Parse NGINX configuration directives."""
+    # TODO: Implement NGINX config parsing
     pass
 
+def validate_config_schema(config: Dict[str, Any], schema: Dict[str, Any]) -> bool:
+    """Validate configuration against the schema."""
+    # TODO: Implement config validation
+    return True
+
+# Example usage
 if __name__ == "__main__":
-    main()
+    config = load_yaml_config("config.yaml")
+    if config:
+        nginx_config = config.get("nginx", {})
+        parse_nginx_config(nginx_config)

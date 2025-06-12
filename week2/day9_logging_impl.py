@@ -1,86 +1,87 @@
 """
-Day 9: Logging Implementation
+Day 9: File Writing - Log File Manager
 
-Challenge Description:
-Implement a comprehensive logging system for your server monitoring application
-that captures all important events, errors, and metrics with appropriate detail
-levels and formats.
+Objective:
+Create a logging system that can write and append server status information
+to log files, with proper formatting and organization.
 
 Learning Objectives:
-1. Configure logging system
-2. Implement different log levels
-3. Create custom log formats
-4. Handle log rotation
+1. Understanding file write modes
+2. Working with append operations
+3. Formatting log entries
+4. Managing log files
 
-Requirements:
-1. Set up logging with:
-   - Multiple output handlers
-   - Different log levels
-   - Custom formatters
-   - Log rotation
+Detailed Instructions:
+1. File Writing Basics (15 mins):
+   - Open files in write mode
+   - Write basic content
+   - Format output
+   - Close files properly
 
-2. Implement logging for:
-   - Application events
-   - Server status changes
-   - Error conditions
-   - Performance metrics
+2. Append Operations (15 mins):
+   - Use append mode
+   - Add new entries
+   - Maintain file structure
+   - Handle existing files
 
-Hints:
-1. Log Levels Usage:
-   - DEBUG: Detailed debugging info
-   - INFO: General operational events
-   - WARNING: Minor issues or warnings
-   - ERROR: Serious problems
-   - CRITICAL: System-wide failures
+3. Log Formatting (15 mins):
+   - Add timestamps
+   - Structure log entries
+   - Include metadata
+   - Format for readability
 
-2. Handler Types:
-   - FileHandler: Log to files
-   - StreamHandler: Console output
-   - RotatingFileHandler: Size-based rotation
-   - TimedRotatingFileHandler: Time-based rotation
+4. Log Management (15 mins):
+   - Implement log rotation
+   - Handle large files
+   - Manage old logs
+   - Add file backup
 
-3. Log Format Example:
-   %(asctime)s - %(name)s - %(levelname)s - %(message)s
-   Additional fields:
-   - %(pathname)s: Full pathname
-   - %(filename)s: Filename
-   - %(funcName)s: Function name
-   - %(lineno)d: Line number
+Key Concepts:
+1. File Modes:
+   ```python
+   # Write mode - creates new file
+   with open('app.log', 'w') as f:
+       f.write('Log Started\\n')
+   
+   # Append mode - adds to existing
+   with open('app.log', 'a') as f:
+       f.write('New Entry\\n')
+   ```
 
-4. Configuration Structure:
-   {
-       'version': 1,
-       'handlers': {
-           'file': {
-               'class': 'logging.FileHandler',
-               'filename': 'app.log',
-               'formatter': 'detailed'
-           }
-       },
-       'formatters': {
-           'detailed': {
-               'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-           }
-       }
-   }
+2. Log Entry Format:
+   ```python
+   from datetime import datetime
+   
+   timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+   log_entry = f'[{timestamp}] Server started\\n'
+   ```
 
-Bonus Challenges:
-1. Add JSON log formatting
-2. Implement log aggregation
-3. Create log analysis tools
-4. Add metrics collection
+Challenge Tasks:
+1. Create log rotation
+2. Add compression
+3. Implement cleanup
+4. Add log analysis
 
-Tips:
-- Use logging.getLogger(__name__)
-- Implement log rotation
-- Add context information
-- Consider log aggregation
-- Include error tracebacks
+Tips for Success:
+- Always use with blocks
+- Add error handling
+- Include timestamps
+- Structure log entries
+
+Common Mistakes to Avoid:
+- Not closing files
+- Missing timestamps
+- Unstructured logs
+- No log rotation
 """
+
+# Only necessary imports
+import os
+from datetime import datetime
+from typing import Dict, List, Optional
 
 import logging
 from logging.handlers import RotatingFileHandler
-import os
 
 # Setup logging configuration
 def setup_logging():

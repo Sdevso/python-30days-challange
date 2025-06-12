@@ -1,80 +1,85 @@
 """
-Day 8: Error Handling in Server Operations
+Day 8: File Reading - Server Configuration Reader
 
-Challenge Description:
-Create a robust error handling system for server operations that gracefully handles
-various types of failures and provides meaningful error messages.
+Objective:
+Build a robust server configuration reader that can handle various file formats
+and deal with common file operation errors.
 
 Learning Objectives:
-1. Implement comprehensive error handling
-2. Create custom exception classes
-3. Use context managers
-4. Develop error recovery strategies
+1. Reading files in Python
+2. Handling file errors
+3. Processing file content
+4. Working with file paths
 
-Requirements:
-1. Create custom exceptions for:
-   - ServerConnectionError
-   - ServiceStatusError
-   - ConfigurationError
-   - ResourceNotFoundError
-   - PermissionError
+Detailed Instructions:
+1. File Reading Basics (15 mins):
+   - Open files safely
+   - Read file content
+   - Process text data
+   - Close file handles
 
-2. Implement error handling for:
-   - Network timeouts
-   - Authentication failures
-   - Resource constraints
-   - Configuration issues
-   - Permission problems
+2. Error Handling (15 mins):
+   - Handle missing files
+   - Deal with permissions
+   - Manage encoding issues
+   - Handle IO errors
 
-Hints:
-1. Custom Exception Structure:
-   class ServerError(Exception):
-       def __init__(self, server, message):
-           self.server = server
-           self.message = message
-           super().__init__(f"{server}: {message}")
+3. Content Processing (15 mins):
+   - Read line by line
+   - Parse file content
+   - Extract information
+   - Format data
 
-2. Error Categories to Handle:
-   - Network Errors:
-     * Connection timeouts
-     * DNS resolution failures
-     * SSL certificate issues
+4. Advanced Techniques (15 mins):
+   - Read large files
+   - Handle different formats
+   - Process in chunks
+   - Memory management
+
+Key Concepts:
+1. File Operations:
+   ```python
+   # Basic file reading
+   with open('config.txt', 'r') as file:
+       content = file.read()
    
-   - Service Errors:
-     * Service not running
-     * Port not available
-     * Resource exhaustion
-   
-   - Configuration Errors:
-     * Missing config files
-     * Invalid parameters
-     * Version mismatches
+   # Reading lines
+   with open('servers.txt') as file:
+       for line in file:
+           process_line(line.strip())
+   ```
 
-3. Error Recovery Strategies:
-   - Implement automatic retries
-   - Use fallback options
-   - Implement circuit breakers
-   - Add timeout mechanisms
+2. Error Handling:
+   ```python
+   try:
+       with open('config.txt') as f:
+           data = f.read()
+   except FileNotFoundError:
+       print("Config file missing")
+   ```
 
-4. Logging and Reporting:
-   - Log error details
-   - Include stack traces
-   - Add context information
-   - Track error frequencies
+Challenge Tasks:
+1. Read multiple formats
+2. Add error recovery
+3. Process large files
+4. Create file summaries
 
-Bonus Challenges:
-1. Implement an error aggregation system
-2. Create error severity levels
-3. Add automated recovery actions
-4. Implement error notifications
+Tips for Success:
+- Always use with statements
+- Check file existence
+- Handle all errors
+- Close files properly
 
-Tips:
-- Use context managers for cleanup
-- Implement proper error hierarchies
-- Add detailed error messages
-- Include system state in errors
-- Consider using error codes
+Common Mistakes to Avoid:
+- Not closing files
+- Missing error handling
+- Memory overflow
+- Encoding issues
 """
+
+# Only necessary imports
+import os
+from typing import Dict, List, Optional
 
 class ServerNotFoundError(Exception):
     """Custom exception for when a server is not found in inventory"""
@@ -88,6 +93,44 @@ def check_server_status(server_name):
     # TODO: Implement server status check with proper error handling
     pass
 
+def read_server_config(file_path: str, encoding: str = 'utf-8') -> List[Dict[str, str]]:
+    """
+    Read server configuration from a file.
+
+    Args:
+        file_path (str): Path to the server configuration file.
+        encoding (str): Encoding of the file. Defaults to 'utf-8'.
+
+    Returns:
+        List[Dict[str, str]]: A list of dictionaries containing server information.
+
+    Raises:
+        FileNotFoundError: If the configuration file is not found.
+        PermissionError: If there is a permission issue accessing the file.
+        UnicodeDecodeError: If there is an encoding problem while reading the file.
+        Exception: For any other unexpected errors.
+    """
+    server_list = []
+    try:
+        with open(file_path, 'r', encoding=encoding) as file:
+            for line in file:
+                try:
+                    # Assuming each line is a new server in the format: name:ip:port
+                    name, ip, port = line.strip().split(':')
+                    server_list.append({'name': name, 'ip': ip, 'port': port})
+                except ValueError:
+                    print(f"Skipping line due to formatting issue: {line.strip()}")
+    except FileNotFoundError:
+        print(f"Configuration file not found: {file_path}")
+    except PermissionError:
+        print(f"Permission denied while accessing the file: {file_path}")
+    except UnicodeDecodeError:
+        print(f"Encoding error while reading the file: {file_path}")
+    except Exception as e:
+        print(f"Unexpected error occurred: {e}")
+
+    return server_list
+
 def main():
     try:
         # TODO: Implement main function with error handling
@@ -100,4 +143,9 @@ def main():
         print(f"Unexpected error occurred: {e}")
 
 if __name__ == "__main__":
+    # Example usage
+    servers = read_server_config('servers.txt')
+    for server in servers:
+        print(f"Found server - Name: {server['name']}, IP: {server['ip']}, Port: {server['port']}")
+    
     main()

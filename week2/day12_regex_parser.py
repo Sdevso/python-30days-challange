@@ -1,104 +1,134 @@
 """
-Day 12: Regular Expressions for Log Parsing
+Day 12: Shell Commands - System Command Handler
 
-Challenge Description:
-Create a log analysis system that can parse various log formats, extract
-meaningful information, and generate insights from server logs.
+Objective:
+Create a robust system command handler that can execute various shell commands,
+process their output, and handle different platforms safely.
 
 Learning Objectives:
-1. Master regex patterns
-2. Parse complex logs
-3. Extract structured data
-4. Generate log analytics
+1. Using subprocess.run()
+2. Managing command execution
+3. Handling command output
+4. Cross-platform commands
 
-Requirements:
-1. Parse common log formats:
-   - Apache/Nginx access logs
-   - System logs (syslog)
-   - Application logs
-   - Error logs
+Detailed Instructions:
+1. Basic Command Execution (15 mins):
+   - Use subprocess.run()
+   - Capture command output
+   - Check return codes
+   - Handle errors
 
-2. Extract information:
-   - Timestamps
-   - IP addresses
-   - Request paths
-   - Status codes
-   - Error messages
+2. Platform Handling (15 mins):
+   - Detect operating system
+   - Adjust commands
+   - Handle differences
+   - Test compatibility
 
-Hints:
-1. Common Log Patterns:
-   Apache Log:
-   ^(\S+) \S+ \S+ \[([\w:/]+\s[+\-]\d{4})\] "(\S+) (\S+) \S+" (\d{3}) (\d+)
+3. Output Processing (15 mins):
+   - Parse command output
+   - Extract information
+   - Format results
+   - Handle encoding
 
-   Syslog:
-   ^(\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+(\S+)\s+([^:]+):\s+(.*)$
+4. Advanced Features (15 mins):
+   - Set timeouts
+   - Handle signals
+   - Chain commands
+   - Stream output
 
-2. Information to Extract:
-   - Timestamps and dates
-   - IP addresses
-   - URLs and paths
-   - Status codes
-   - Error messages
-   - User agents
-   - Request methods
+Key Concepts:
+1. Command Execution:
+   ```python
+   # Basic command running
+   import subprocess
+   
+   result = subprocess.run(
+       ['ping', '-n', '1', 'localhost'],
+       capture_output=True,
+       text=True
+   )
+   ```
 
-3. Analysis Features:
-   - Request frequency
-   - Error rates
-   - Response times
-   - Traffic patterns
-   - Error clustering
+2. Platform Handling:
+   ```python
+   # Cross-platform command
+   import sys
+   
+   ping_cmd = ['ping', '-n' if sys.platform == 'win32' else '-c', '1']
+   ```
 
-4. Output Formats:
-   {
-       'timestamp': '2025-06-10 10:00:00',
-       'ip': '192.168.1.1',
-       'method': 'GET',
-       'path': '/api/status',
-       'status': 200,
-       'size': 1234
-   }
+Challenge Tasks:
+1. Create command chains
+2. Add progress tracking
+3. Implement timeouts
+4. Handle long output
 
-Bonus Challenges:
-1. Add pattern discovery
-2. Implement log correlation
-3. Create pattern library
-4. Add anomaly detection
+Tips for Success:
+- Always handle errors
+- Check return codes
+- Set timeouts
+- Use proper encoding
 
-Tips:
-- Use named capture groups
-- Compile regex patterns
-- Add pattern documentation
-- Handle multiple formats
-- Consider performance
+Common Mistakes to Avoid:
+- Shell injection risks
+- Missing error checks
+- Platform assumptions
+- Resource leaks
 """
 
-import re
-from datetime import datetime
+# Only necessary imports
+import subprocess
+import sys
+from typing import Dict, List, Optional
 
-# Example log patterns
-APACHE_LOG_PATTERN = r'(\d+\.\d+\.\d+\.\d+).*\[(.*?)\].*"(\w+)\s+([^\s]+).*"\s+(\d+)\s+(\d+)'
-SYSLOG_PATTERN = r'(\w+\s+\d+\s+\d+:\d+:\d+).*?(\w+):\s+(.*)'
+class CommandResult:
+    """Class to represent the result of a command execution."""
+    def __init__(self, stdout: str, stderr: str, returncode: int):
+        self.stdout = stdout
+        self.stderr = stderr
+        self.returncode = returncode
 
-class LogParser:
-    def __init__(self, log_file):
-        self.log_file = log_file
-    
-    def parse_apache_logs(self):
-        # TODO: Implement Apache log parsing
-        pass
-    
-    def parse_syslog(self):
-        # TODO: Implement syslog parsing
-        pass
-    
-    def generate_summary(self):
-        # TODO: Implement log summary generation
-        pass
+    def __repr__(self):
+        return f"<CommandResult returncode={self.returncode}>"
+
+def run_command(command: List[str], timeout: Optional[int] = 30) -> CommandResult:
+    """Run a system command and return the result."""
+    try:
+        # Run command and capture output
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            timeout=timeout
+        )
+        return CommandResult(result.stdout, result.stderr, result.returncode)
+    except subprocess.TimeoutExpired:
+        print(f"Command timed out after {timeout} seconds")
+        return CommandResult("", "Command timed out", -1)
+    except Exception as e:
+        print(f"Error running command: {str(e)}")
+        return CommandResult("", str(e), -1)
+
+def ping(hostname: str) -> CommandResult:
+    """Ping a hostname and return the result."""
+    command = ["ping", "-n" if sys.platform == "win32" else "-c", "1", hostname]
+    return run_command(command)
+
+def check_service(service_name: str) -> CommandResult:
+    """Check the status of a service and return the result."""
+    command = ["sc", "query", service_name] if sys.platform == "win32" else ["systemctl", "status", service_name]
+    return run_command(command)
 
 def main():
-    # TODO: Implement main function to demonstrate log parsing
-    pass
+    """Main function to demonstrate command handling."""
+    # Example: Ping localhost
+    result = ping("localhost")
+    print(f"Ping result: {result}")
+
+    # Example: Check service status
+    service_name = "wuauserv"  # Windows Update Service
+    result = check_service(service_name)
+    print(f"Service status: {result}")
 
 if __name__ == "__main__":
     main()

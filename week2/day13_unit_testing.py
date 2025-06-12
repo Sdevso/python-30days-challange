@@ -1,106 +1,87 @@
 """
-Day 13: Unit Testing
+Day 13: JSON Configs - Configuration Handler
 
-Challenge Description:
-Develop a comprehensive test suite for your server monitoring application
-that ensures reliability and catches potential issues before deployment.
+Objective:
+Create a JSON configuration handler that can read, validate, and manage
+application settings stored in JSON format.
 
 Learning Objectives:
-1. Write effective unit tests
-2. Implement test fixtures
-3. Use mocking effectively
-4. Measure test coverage
+1. Working with JSON data
+2. Reading config files
+3. Validating configurations
+4. Managing nested data
 
-Requirements:
-1. Create tests for:
-   - Server status checks
-   - Service monitoring
-   - Configuration handling
-   - Error scenarios
+Detailed Instructions:
+1. JSON Basics (15 mins):
+   - Import json module
+   - Read JSON files
+   - Parse JSON strings
+   - Handle JSON errors
 
-2. Implement:
-   - Unit tests
-   - Integration tests
-   - Mock objects
-   - Test fixtures
+2. Config Structure (15 mins):
+   - Define config schema
+   - Create config sections
+   - Set default values
+   - Add validation rules
 
-Hints:
-1. Test Structure:
-   class TestServerMonitor(unittest.TestCase):
-       def setUp(self):
-           # Setup test environment
-           self.monitor = ServerMonitor()
-           self.test_server = {
-               'name': 'test-server',
-               'ip': '127.0.0.1'
-           }
+3. Data Access (15 mins):
+   - Access nested data
+   - Use safe getters
+   - Handle missing keys
+   - Set fallback values
 
-       def test_server_status(self):
-           status = self.monitor.check_status(self.test_server)
-           self.assertTrue(status['online'])
+4. Config Management (15 mins):
+   - Update config values
+   - Save changes
+   - Merge configs
+   - Handle backups
 
-2. Mocking Examples:
-   @patch('requests.get')
-   def test_api_call(self, mock_get):
-       mock_get.return_value.status_code = 200
-       mock_get.return_value.json.return_value = {'status': 'ok'}
-       result = self.monitor.check_api()
-       self.assertEqual(result['status'], 'ok')
+Key Concepts:
+1. JSON Operations:
+   ```python
+   # Reading JSON
+   import json
+   
+   with open('config.json') as f:
+       config = json.load(f)
+   
+   # Safe access
+   server_port = config.get('server', {}).get('port', 8080)
+   ```
 
-3. Test Scenarios:
-   - Normal operation
-   - Error conditions
-   - Edge cases
-   - Performance limits
-   - Resource constraints
+2. Config Structure:
+   ```python
+   # Example config
+   default_config = {
+       'server': {
+           'host': 'localhost',
+           'port': 8080
+       },
+       'logging': {
+           'level': 'INFO'
+       }
+   }
+   ```
 
-4. Coverage Tracking:
-   - Line coverage
-   - Branch coverage
-   - Function coverage
-   - Integration paths
+Challenge Tasks:
+1. Add schema validation
+2. Implement config merging
+3. Create backup system
+4. Add change tracking
 
-Bonus Challenges:
-1. Add performance tests
-2. Implement load testing
-3. Create stress tests
-4. Add security tests
+Tips for Success:
+- Always validate JSON
+- Use safe accessors
+- Handle missing data
+- Keep backups
 
-Tips:
-- Use descriptive test names
-- Test one thing per test
-- Use appropriate assertions
-- Mock external services
-- Maintain test independence
+Common Mistakes to Avoid:
+- Direct dict access
+- Missing error handling
+- No validation
+- Hard-coded values
 """
 
-import unittest
-from unittest.mock import patch, MagicMock
-
-class ServerMonitorTests(unittest.TestCase):
-    def setUp(self):
-        # TODO: Set up test environment
-        pass
-    
-    def tearDown(self):
-        # TODO: Clean up after tests
-        pass
-    
-    def test_server_status_check(self):
-        # TODO: Implement test for server status checking
-        pass
-    
-    def test_error_handling(self):
-        # TODO: Implement test for error handling
-        pass
-    
-    @patch('requests.get')
-    def test_api_calls(self, mock_get):
-        # TODO: Implement test for API calls
-        pass
-
-def main():
-    unittest.main()
-
-if __name__ == "__main__":
-    main()
+# Only necessary imports
+import json
+from typing import Dict, Any, Optional

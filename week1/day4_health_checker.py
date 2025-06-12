@@ -1,68 +1,80 @@
 """
-Day 4: Server Health Checker
+Day 4: Conditions - Server Health Logic
 
-Challenge Description:
-Write a script that checks the health status of servers by monitoring various metrics such as:
-- CPU usage
-- Memory utilization
-- Disk space
-- Network connectivity
-- Running services
+Objective:
+Implement a server health checking system using conditional statements to
+evaluate different metrics and determine server status.
 
 Learning Objectives:
-1. Work with system metrics
-2. Implement health check functions
-3. Create a scoring system for server health
-4. Handle different types of metrics
-5. Implement threshold-based alerts
+1. Understanding if/elif/else statements
+2. Using comparison operators
+3. Working with boolean logic
+4. Implementing complex conditions
 
-Requirements:
-1. Read server details from Inventory.json
-2. Check multiple health metrics for each server
-3. Calculate an overall health score (0-100%)
-4. Generate alerts for servers below threshold
-5. Format output in an easily readable way
+Detailed Instructions:
+1. Basic Conditions (15 mins):
+   - Write simple if statements
+   - Use comparison operators
+   - Test boolean conditions
 
-Hints:
-1. Use psutil library for system metrics:
-   - psutil.cpu_percent() for CPU usage
-   - psutil.virtual_memory() for memory
-   - psutil.disk_usage() for disk space
+2. Status Levels (15 mins):
+   - Implement warning thresholds
+   - Add critical thresholds
+   - Create status messages
 
-2. For network connectivity:
-   - Use ping or socket connection tests
-   - Set appropriate timeouts
-   - Handle connection errors
+3. Multiple Checks (15 mins):
+   - Combine CPU and memory checks
+   - Use AND/OR operators
+   - Handle multiple conditions
 
-3. Health Score Calculation:
-   - Weight different metrics appropriately
-   - CPU: 30%
-   - Memory: 25%
-   - Disk: 25%
-   - Network: 20%
+4. Health Score (15 mins):
+   - Calculate overall health
+   - Weight different metrics
+   - Format status output
 
-4. Alert Thresholds:
-   - Critical: < 50%
-   - Warning: < 70%
-   - Healthy: >= 70%
+Key Concepts:
+1. Conditional Statements:
+   - if condition:
+   - elif condition:
+   - else:
+   
+2. Comparison Operators:
+   - == (equal)
+   - != (not equal)
+   - >, <, >=, <= (comparisons)
 
-5. Error Handling:
-   - Handle unreachable servers
-   - Handle missing metrics
-   - Provide meaningful error messages
+Example Structure:
+```python
+# Basic condition
+if cpu_usage > 90:
+    status = "Critical"
 
-Bonus Challenges:
-1. Add historical tracking of health scores
-2. Implement trend analysis
-3. Create a simple report generation function
-4. Add email notifications for critical status
+# Multiple conditions
+if cpu_usage > 90 and memory_usage > 85:
+    status = "Critical"
+elif cpu_usage > 70 or memory_usage > 70:
+    status = "Warning"
+else:
+    status = "Normal"
+```
 
-Tips:
-- Use dictionaries to store health metrics
-- Implement modular functions for each check
-- Add proper error handling
-- Use color coding for different status levels
-- Add logging for health check results
+Challenge Tasks:
+1. Add multiple health metrics
+2. Implement status severity levels
+3. Create health score calculation
+4. Add threshold configuration
+
+Tips for Success:
+- Start with simple conditions
+- Test each condition separately
+- Use clear comparison values
+- Add status messages
+
+Common Mistakes to Avoid:
+- Complex nested conditions
+- Missing edge cases
+- Unclear status messages
+- Hard-coded values
 """
 
-# Implement your solution here
+# Only necessary imports

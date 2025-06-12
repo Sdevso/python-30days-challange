@@ -1,49 +1,123 @@
+"""
+Day 3: Input & F-strings - Interactive Server Query
+
+Objective:
+Build an interactive server query tool that takes user input and displays
+formatted server information using Python's input() function and f-strings.
+
+Learning Objectives:
+1. Using input() for user interaction
+2. Mastering f-string formatting
+3. Processing user input
+4. Creating formatted output
+
+Detailed Instructions:
+1. User Input Basics (15 mins):
+   - Get server name from user
+   - Process different input types
+   - Handle empty input
+
+2. F-string Usage (15 mins):
+   - Basic f-string syntax
+   - Embedding expressions
+   - Formatting options
+
+3. Input Processing (15 mins):
+   - Split comma-separated input
+   - Remove whitespace
+   - Convert input types
+
+4. Output Formatting (15 mins):
+   - Create status display
+   - Format numbers and text
+   - Add visual elements
+
+Key Concepts:
+1. Input Function:
+   - Basic: name = input("Enter name: ")
+   - With prompt
+   - Input validation
+
+2. F-string Features:
+   - Basic: f"Server: {name}"
+   - Expressions: f"Memory: {ram * 2}GB"
+   - Formatting: f"Usage: {cpu:.2f}%"
+
+Example Structure:
+```python
+# Basic input
+server = input("Enter server name: ")
+
+# Input processing
+servers = input("Enter servers (comma-separated): ")
+server_list = [s.strip() for s in servers.split(',')]
+
+# F-string formatting
+status = "online"
+uptime = 98.5
+print(f"Server {server} is {status} ({uptime:.1f}% uptime)")
+```
+
+Challenge Tasks:
+1. Create a multi-server query system
+2. Add input validation
+3. Format output as a table
+4. Implement search functionality
+
+Tips for Success:
+- Always validate user input
+- Use clear input prompts
+- Format output for readability
+- Handle edge cases
+
+Common Mistakes to Avoid:
+- Not handling invalid input
+- Forgetting to strip whitespace
+- Complex f-string expressions
+- Missing input validation
+"""
+
+# Only necessary imports
 import json
+import os
 
-file_path= r'G:\project\python-30days\week1\Inventory.json'
+# Your code starts here:
+# 1. Get server details using input()
+# 2. Format the input using f-strings
+# 3. Create nicely formatted output
+# 4. Handle different input types
 
-with open (file_path,'r') as file:
-    data=json.load(file)
+# Example structure:
+'''
+# Basic input with f-string
+name = input("Enter server name: ")
+print(f"Checking server: {name}")
 
-servers=data['servers']
+# Multiple inputs formatted together
+host = input("Enter host: ")
+port = input("Enter port: ")
+print(f"Server address: {host}:{port}")
 
+# F-string with expressions
+memory = input("Enter memory (GB): ")
+print(f"Memory available: {int(memory) * 1024}MB")
 
-raw_input_from_user=input("please provide server name (comma sperated) : ").split(',')
-search_name= (name.strip() for name in raw_input_from_user if name.strip())
+# Multi-line f-string output
+status = input("Enter status (up/down): ")
+output = f"""
+Server Status Report
+-------------------
+Name: {name}
+Address: {host}:{port}
+Status: {status.upper()}
+Memory: {memory}GB
+-------------------
+"""
+print(output)
+'''
 
-print("\n *************************server inventory lookup************************* \n")
-print("-------------------------------\n")
-
-
-for requested_name in search_name:
-    found_server = None
-    
-    for server in servers:
-        if server.get('name') == requested_name:
-            found_server=server
-            break
-    if found_server:
-        print("Server detail for: ", found_server.get('name'))
-
-        print("Name : ", found_server.get('name'))
-        print("IP : ", found_server.get('ip'))
-        print("is_running : ", found_server.get('is_running') if 'is_running' in found_server else "Down" )
-        if 'metadata' in server:
-            metadata=server['metadata']
-            # Prints the 'uptime' from the 'metadata' dictionary. .get() is used for safe access, defaulting to "N/A".
-            print("uptime: ", metadata.get('uptime') if 'uptime' in metadata else "N/A")
-        # Prints the 'location' from the 'metadata' dictionary.
-            print("location: ", metadata.get('location') if 'location' in metadata else "N/A")
-        # Prints the 'OS' from the 'metadata' dictionary. (Note: 'OS' is typically capitalized in your JSON).
-            print("OS: ", metadata.get('OS') if 'OS' in metadata else "N/A")
-        # Prints the 'environment' from the 'metadata' dictionary, if available in your random inventory.
-            print("environment: ", metadata.get('environment') if 'environment' in metadata else "N/A")
-        # Prints a separator line to distinguish between server entries.
-            print("------------------------------------")
-        else:
-            print("Metadata not found for server: ", found_server.get('name'))
-            print("------------------------------------")
-
-    else:
-        print(f"Server '{requested_name}' not found in inventory.")
-        print("----------------------\n")
+# Tips:
+# - Use descriptive input prompts
+# - Format output for readability
+# - Try nested f-strings
+# - Use f-strings with different data types

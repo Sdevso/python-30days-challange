@@ -1,53 +1,126 @@
-import json # Imports the 'json' module, which provides tools for working with JSON data.
+"""
+Day 2: Variables & Data Types - Server Inventory Manager
 
-# Defines the path to your inventory file.
-# The 'r' before the string makes it a "raw string" to correctly handle backslashes in Windows file paths.
-file_path = r'G:\project\python-30days\week1\Inventory.json'
+Objective:
+Create a server inventory system using different Python data types to store
+and manage server information effectively.
 
-# Opens the file specified by 'file_path' in 'r' (read) mode.
-# The 'with' statement ensures the file is automatically closed when done, even if errors happen.
-with open(file_path, 'r') as file:
-    # Reads the JSON data from the opened file and converts it into Python objects (like dictionaries and lists).
-    data = json.load(file)
+Learning Objectives:
+1. Understanding Python variables
+2. Working with basic data types
+3. Using lists and dictionaries
+4. Type conversion and checking
 
-# Accesses the value associated with the 'servers' key from the 'data' dictionary.
-# This value is a list of server dictionaries, which is assigned to the 'servers' variable.
-servers = data['servers']
+Detailed Instructions:
+1. Basic Server Variables (15 mins):
+   - Create variables for server name, IP, status
+   - Use appropriate data types for each
+   - Print and verify variable types
 
-# Prints a descriptive header for the inventory list.
-print("server inventory list\n")
-print("------------------------------------")
+2. Server Lists (15 mins):
+   - Create a list of server names
+   - Add server IPs to a separate list
+   - Combine related information
 
-# Loops through each individual server dictionary in the 'servers' list.
-# In each iteration, 'server' will hold one server's data (e.g., {"name": "web-prod-01", ...}).
-for server in servers:
-    # Prints the server's name. .get('name') is used for safe access; it returns None if 'name' key is missing.
-    print("Server name: ", server.get('name'))
-    # Prints the server's IP address using .get() for safe access.
-    print("IP: ", server.get('ip'))
+3. Server Dictionary (15 mins):
+   - Create a dictionary for server details
+   - Add multiple properties
+   - Access dictionary values
 
-    # Checks if the 'is_running' key exists in the current 'server' dictionary.
-    # This is a conditional expression (often called a ternary operator):
-    # If 'is_running' is present, it prints its value. Otherwise, it prints "Down".
-    print("is_running", server.get('is_running') if 'is_running' in server else "Down")
+4. Data Type Operations (15 mins):
+   - Convert strings to integers
+   - Join lists and strings
+   - Update dictionary values
 
-    # Checks if the 'metadata' key exists in the current 'server' dictionary.
-    # THIS IS THE CORRECTED COMMENT: Previously, it incorrectly said 'metedata'.
-    if 'metadata' in server:
-        # If 'metadata' exists, it retrieves its value (which is another dictionary).
-        metadata = server['metadata']
-        # Prints the 'uptime' from the 'metadata' dictionary. .get() is used for safe access, defaulting to "N/A".
-        print("uptime: ", metadata.get('uptime', "N/A"))
-        # Prints the 'location' from the 'metadata' dictionary.
-        print("location: ", metadata.get('location', "N/A"))
-        # Prints the 'OS' from the 'metadata' dictionary. (Note: 'OS' is typically capitalized in your JSON).
-        print("OS: ", metadata.get('OS', "N/A"))
-        # Prints the 'environment' from the 'metadata' dictionary, if available in your random inventory.
-        print("environment: ", metadata.get('environment', "N/A"))
-        # Prints a separator line to distinguish between server entries.
-        print("------------------------------------")
-    else:
-        # If the 'metadata' key is not present for the current server.
-        print("No metadata present for server")
-        # Prints a separator line even if no metadata was found, for consistent output formatting.
-        print("------------------------------------")
+Key Concepts:
+1. Variable Types:
+   - str: server names, IPs
+   - int: ports, counts
+   - bool: status flags
+   - list: collections
+   - dict: key-value pairs
+
+2. Type Operations:
+   - type(): check variable type
+   - int(): convert to integer
+   - str(): convert to string
+   - list(): create/convert to list
+
+Example Structure:
+```python
+# Basic variables
+server_name = "web-server-01"
+server_port = 443
+is_active = True
+
+# List example
+servers = ["web-01", "web-02"]
+ports = [80, 443]
+
+# Dictionary example
+server_info = {
+    "name": "web-01",
+    "ip": "192.168.1.100",
+    "active": True
+}
+```
+
+Challenge Tasks:
+1. Create a multi-server inventory
+2. Add nested dictionaries
+3. Implement type validation
+4. Create a server status display
+
+Tips for Success:
+- Use meaningful variable names
+- Keep track of data types
+- Test dictionary access
+- Validate data before storing
+
+Common Mistakes to Avoid:
+- Using wrong data types
+- Forgetting dictionary keys
+- Not handling missing values
+- Mixing data type operations
+"""
+
+# Only necessary imports
+import json
+import os
+
+# Your code starts here:
+# 1. Create variables for a server
+# 2. Use appropriate data types
+# 3. Create a list of servers
+# 4. Print server information
+
+# Example structure:
+'''
+# String variables
+server_name = "web-prod-01"
+server_ip = "192.168.1.10"
+
+# Integer variables
+server_port = 443
+max_connections = 1000
+
+# Boolean variables
+is_running = True
+is_primary = False
+
+# List of servers
+server_list = ["web-01", "web-02", "db-01"]
+
+# Dictionary for server metadata
+server_info = {
+    "name": server_name,
+    "port": server_port,
+    "status": is_running
+}
+'''
+
+# Tips:
+# - Use meaningful variable names
+# - Try different data types
+# - Create a small server inventory
+# - Print and check variable types

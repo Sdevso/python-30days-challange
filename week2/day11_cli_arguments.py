@@ -1,75 +1,86 @@
 """
-Day 11: Command Line Arguments
+Day 11: Exceptions - Robust Error Handler
 
-Challenge Description:
-Create a comprehensive command-line interface for your server monitoring
-application that provides intuitive commands, options, and help documentation.
+Objective:
+Build a robust error handling system for file operations and server
+management tasks, focusing on graceful error recovery and user feedback.
 
 Learning Objectives:
-1. Design CLI interfaces
-2. Implement argument parsing
-3. Create help documentation
-4. Handle user input
+1. Understanding try/except blocks
+2. Handling specific exceptions
+3. Implementing error recovery
+4. Creating custom exceptions
 
-Requirements:
-1. Implement commands for:
-   - Server status checks
-   - Service management
-   - Configuration updates
-   - Report generation
+Detailed Instructions:
+1. Basic Error Handling (15 mins):
+   - Write try/except blocks
+   - Catch specific exceptions
+   - Handle file errors
+   - Provide error messages
 
-2. Support features:
-   - Subcommands
-   - Required/optional args
-   - Default values
-   - Help text
+2. Custom Exceptions (15 mins):
+   - Create exception classes
+   - Add custom messages
+   - Include error details
+   - Handle multiple errors
 
-Hints:
-1. Command Structure:
-   servermon <command> [options]
-   
-   Commands:
-   - status: Check server status
-   - service: Manage services
-   - config: Update configuration
-   - report: Generate reports
+3. Error Recovery (15 mins):
+   - Implement retry logic
+   - Add fallback options
+   - Create recovery steps
+   - Log error details
 
-2. Options Example:
-   servermon status --server web-01 --service nginx --format json
-   
-   Common Options:
-   --server: Target server
-   --service: Target service
-   --format: Output format
-   --verbose: Detail level
+4. Advanced Features (15 mins):
+   - Chain exception handling
+   - Use context managers
+   - Add cleanup code
+   - Create error reports
 
-3. Argument Groups:
-   - Main commands
-   - Server selection
-   - Output formatting
-   - Authentication
-   - Logging options
+Key Concepts:
+1. Exception Handling:
+   ```python
+   try:
+       with open('config.txt') as f:
+           data = f.read()
+   except FileNotFoundError:
+       print('Config file missing')
+   except PermissionError:
+       print('Access denied')
+   finally:
+       print('Cleanup code')
+   ```
 
-4. Help Documentation:
-   - Command overview
-   - Option descriptions
-   - Usage examples
-   - Error messages
+2. Custom Exceptions:
+   ```python
+   class ServerError(Exception):
+       def __init__(self, server, message):
+           self.server = server
+           self.message = message
+           super().__init__(f"{server}: {message}")
+   ```
 
-Bonus Challenges:
-1. Add command completion
-2. Implement interactive mode
-3. Create config wizard
-4. Add batch processing
+Challenge Tasks:
+1. Add retry mechanism
+2. Create error logging
+3. Implement recovery
+4. Add error reporting
 
-Tips:
-- Use argparse subcommands
-- Add detailed help text
-- Implement input validation
-- Include usage examples
-- Handle errors gracefully
+Tips for Success:
+- Be specific with exceptions
+- Always clean up resources
+- Log error details
+- Plan recovery steps
+
+Common Mistakes to Avoid:
+- Catching all exceptions
+- Empty except blocks
+- Missing cleanup code
+- Hiding error details
 """
 
+# Only necessary imports
+import os
+from typing import Dict, List, Optional
 import argparse
 import sys
 

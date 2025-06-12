@@ -1,70 +1,79 @@
 """
-Day 5: Service Monitor
+Day 5: Loops - Service Monitor
 
-Challenge Description:
-Create a script that monitors multiple services running on different servers.
-The script should check service status, uptime, and resource usage.
+Objective:
+Build a service monitoring system using loops to continuously check multiple
+services and their status.
 
 Learning Objectives:
-1. Working with service management
-2. Implementing monitoring loops
-3. Handling multiple services
-4. Processing service metrics
+1. Understanding for loops
+2. Working with while loops
+3. Using loop control statements
+4. Implementing monitoring cycles
 
-Requirements:
-1. Monitor multiple services per server
-2. Check service status (running/stopped)
-3. Track service uptime
-4. Monitor resource usage per service
-5. Generate service health reports
+Detailed Instructions:
+1. For Loop Basics (15 mins):
+   - Iterate through service lists
+   - Access list elements
+   - Use range() function
 
-Hints:
-1. Service Status Checking:
-   - Windows: sc query servicename
-   - Linux: systemctl status servicename
-   - Handle both OS types
+2. While Loop Usage (15 mins):
+   - Create monitoring loops
+   - Set exit conditions
+   - Handle infinite loops
 
-2. Resource Monitoring:
-   - Track CPU usage per service
-   - Monitor memory consumption
-   - Check port availability
-   - Track response times
+3. Loop Control (15 mins):
+   - Use break statement
+   - Use continue statement
+   - Implement counters
 
-3. Data Structure:
-   {
-       "server_name": {
-           "service1": {
-               "status": "running",
-               "uptime": "5d 2h",
-               "cpu_usage": "25%",
-               "memory": "150MB"
-           }
-       }
-   }
+4. Nested Loops (15 mins):
+   - Check multiple servers
+   - Monitor multiple services
+   - Control nested execution
 
-4. Implementation Tips:
-   - Use subprocess for service checks
-   - Implement timeout mechanisms
-   - Add error handling for each check
-   - Store historical data
+Key Concepts:
+1. For Loop:
+   - Basic: for item in list:
+   - With range: for i in range(5):
+   - With enumerate: for i, item in enumerate(list):
 
-5. Output Formatting:
-   - Use tables for better readability
-   - Color code status (green/yellow/red)
-   - Include timestamp for each check
+2. While Loop:
+   - Basic: while condition:
+   - With counter
+   - With boolean flag
 
-Bonus Challenges:
-1. Add service dependency tracking
-2. Implement service restart capability
-3. Create service health trends
-4. Add configuration file support
+Example Structure:
+```python
+# Simple for loop
+services = ["web", "db", "cache"]
+for service in services:
+    print(f"Checking {service}")
 
-Tips:
-- Use context managers for resources
-- Implement proper error handling
-- Add logging functionality
-- Consider cross-platform compatibility
-- Use async operations for better performance
+# Basic while loop
+attempts = 0
+while attempts < 3:
+    # check service
+    attempts += 1
+```
+
+Challenge Tasks:
+1. Monitor multiple services
+2. Add retry logic
+3. Implement interval checks
+4. Create service dependencies
+
+Tips for Success:
+- Always have an exit condition
+- Use clear loop variables
+- Add progress messages
+- Handle loop termination
+
+Common Mistakes to Avoid:
+- Infinite loops
+- Missing counter updates
+- Complex nested loops
+- Forgetting break conditions
 """
 
-# Implement your solution here
+# Only necessary imports
