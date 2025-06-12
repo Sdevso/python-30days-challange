@@ -1,0 +1,23 @@
+{
+  "[python]": {
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.parameterHints.enabled": false,
+    "editor.hover.enabled": false
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "python": false
+  },
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.autoTestDiscoverOnSaveEnabled": false,
+  "python.analysis.autoSearchPaths": false,
+  "python.analysis.diagnosticMode": "none",
+  "python.languageServer": "None"
+}
